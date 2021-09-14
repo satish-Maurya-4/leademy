@@ -1,32 +1,47 @@
 import React from 'react'
-import { View, Text, TextInput, CheckBox, Button } from 'react-native'
-import { styles } from '../../components/header/style'
+import {
+  View,
+  Text,
+  TextInput,
+  CheckBox,
+  Button,
+  KeyboardAvoidingView,
+} from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { styles } from './styles'
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <LinearGradient colors={['#f60', '#f25']} style={styles.background} />
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.logo}>LEADEMY</Text>
           <View style={styles.headerText}>
             <Text style={styles.title}>WELCOME TO LEADEMY</Text>
-            <Text>COME HERE OFTEN?</Text>
-            <Text>Login To Come in</Text>
           </View>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput placeholder="Username or Email Address" />
-          <TextInput placeholder="Password" />
-          <CheckBox
-            // value={isSelected}
-            // onValueChange={setSelection}
-            style={styles.checkbox}
+          <Text style={styles.inputTitle}>COME HERE OFTEN?</Text>
+          <Text style={styles.inputSubTitle}>Login To Come in</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Username or Email Address"
           />
-          <Text>Remember me</Text>
+          <TextInput style={styles.input} placeholder="Password" />
+          <View style={styles.checkbox}>
+            <CheckBox
+              // value={isSelected}
+              // onValueChange={setSelection}
+              style={styles.tick}
+            />
+            <Text style={styles.checkboxText}>Remember me</Text>
+          </View>
         </View>
         <Button title="LOG IN" />
       </View>
-    </View>
+      <View style={{ height: 40 }} />
+    </KeyboardAvoidingView>
   )
 }
 

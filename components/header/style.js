@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 60,
-
     borderWidth: 1,
   },
   header: {
@@ -20,5 +19,15 @@ export const styles = StyleSheet.create({
   logo: {
     color: '#ffffff',
     fontSize: 20,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 80,
+  },
+  button: {
+    // backgroundColor: '#c82',
   },
 })
