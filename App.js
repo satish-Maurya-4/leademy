@@ -1,48 +1,37 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import SignUpScreen from './screens/signUp/SignUpScreen'
+
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
 
-import Header from './components/header'
-import Home from './screens/homeScreen'
+import HomeScreen from './screens/HomeScreen'
+import { StatusBar } from 'expo-status-bar'
+import { Ionicons } from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator()
 
-export default function App() {
-  // const globalScreenOptions = {
-  //   headerStyle: {
-  //     backgroundColor: 'red',
-  //   },
-  //   headerTitleStyle: { color: '#ffffff' },
-  //   headerTintColor: '#ffffff',
-  // }
-  // screenOptions={globalScreenOptions}
-
+const App = () => {
   return (
-    <SafeAreaProvider>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#102' }}>
       <NavigationContainer>
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
         <Stack.Navigator>
           <Stack.Screen
-            name="Home"
-            component={Home}
+            name="Leademy"
+            component={HomeScreen}
             options={{
-              headerTitle: 'Leademy',
+              headerStyle: {
+                backgroundColor: '#306',
+              },
+              headerTitleStyle: {
+                color: '#fff',
+              },
             }}
           />
-          <Stack.Screen name="signUp" component={SignUpScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaProvider>
+    </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-})
+export default App
