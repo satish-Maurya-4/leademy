@@ -1,57 +1,30 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Modal,
-  Pressable,
-  SafeAreaProvider,
-} from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { Entypo } from '@expo/vector-icons'
+import { StyleSheet, Text, View, Button, Pressable } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import Nav from '../components/Nav'
 
 const HomeScreen = ({ navigation }) => {
-  const [isOpenMenuModal, setIsOpenMenuModal] = useState('false')
-  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState('false')
-
-  navigation.setOptions({
-    headerRight: () => {
-      return (
-        <View style={styles.headerRight}>
-          <Pressable onPress={() => setIsOpenMenuModal(true)}>
-            <Ionicons name="md-menu" size={40} color="#fff" />
-          </Pressable>
-          <Button
-            title="Sign Up"
-            color="#fc7"
-            onPress={() => setIsOpenSignUpModal(true)}
-          />
-        </View>
-      )
-    },
-  })
+  const [popUp, setPopUp] = useState(false)
+  // console.log(navigation.options)
   return (
-    <View>
-      <Modal visible={isOpenMenuModal} animationType="slide">
-        <Text>I'm a modal</Text>
-        <Pressable
-          style={styles.closeIcon}
-          onPress={() => setIsOpenMenuModal(false)}
-        >
-          <Entypo name="cross" size={32} color="black" />
-        </Pressable>
-      </Modal>
-      <Modal visible={isOpenSignUpModal} animationType="slide">
-        <Text>I'm a sign up modal</Text>
-        <Pressable
-          style={styles.closeIcon}
-          onPress={() => setIsOpenSignUpModal(false)}
-        >
-          <Entypo name="cross" size={32} color="black" />
-        </Pressable>
-      </Modal>
-      <Text style={{ color: '#000' }}>Home</Text>
+    <View style={styles.container}>
+      <LinearGradient colors={['#306', '#102']} style={styles.gradient} />
+      <View style={styles.header}>
+        <Text style={styles.logo}>LEADEMY</Text>
+        <View style={styles.headerRight}>
+          <Pressable onPress={() => setPopUp(!popUp)} style={styles.icon}>
+            {popUp ? (
+              <FontAwesome name="close" size={24} color="#fff" />
+            ) : (
+              <FontAwesome5 name="bars" size={24} color="#fff" />
+            )}
+          </Pressable>
+          <Button title="Sign Up" color="#fc7" />
+        </View>
+      </View>
+      {popUp ? <Nav /> : null}
     </View>
   )
 }
@@ -59,14 +32,60 @@ const HomeScreen = ({ navigation }) => {
 export default HomeScreen
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 40,
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 50,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    height: 50,
+    paddingLeft: 10,
+    paddingRight: 10,
+    position: 'relative',
+  },
+  logo: {
+    color: '#fff',
+    fontSize: 20,
+  },
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  closeIcon: {
+  icon: {
+    marginRight: 10,
+  },
+  navContainer: {
     position: 'absolute',
-    right: 5,
-    top: 5,
+    top: 60,
+    left: 0,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    zIndex: 100,
+  },
+  nav: {
+    width: '96%',
+    height: 200,
+    borderWidth: 1,
+    borderColor: 'red',
+    backgroundColor: 'yellow',
+  },
+  navTitle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  navItems: {
+    alignItems: 'center',
   },
 })

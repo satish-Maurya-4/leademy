@@ -1,37 +1,43 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { View, Text, SafeAreaView, StyleSheet, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context'
-
 import HomeScreen from './screens/HomeScreen'
-import { StatusBar } from 'expo-status-bar'
-import { Ionicons } from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator()
-
 const App = () => {
+  const [popUp, setPopUp] = useState('hello')
+  const showNav = () => {
+    console.log(popUp)
+  }
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#102' }}>
-      <NavigationContainer>
-        <StatusBar style="light" />
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Leademy"
-            component={HomeScreen}
-            options={{
-              headerStyle: {
-                backgroundColor: '#306',
-              },
-              headerTitleStyle: {
-                color: '#fff',
-              },
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <NavigationContainer>
+      {/* <View style={styles.navPopUp}>
+        <Text>Helllo</Text>
+      </View> */}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <View style={{ marginTop: 40 }}>
+    //   <Header />
+    // </View>
   )
 }
 
 export default App
+
+const styles = StyleSheet.create({
+  navPopUp: {
+    position: 'absolute',
+    top: 100,
+    left: 20,
+    zIndex: 100,
+  },
+})
